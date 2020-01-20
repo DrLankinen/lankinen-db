@@ -9,7 +9,7 @@ db = SQLAlchemy(app)
 
 from src import views
 
-from application.dbs import models
-from application.dbs import views
+from src.databases import models
+from src.databases import views
 
 db.create_all()

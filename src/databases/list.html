@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<table>
+    <tr>
+        <th>Database</th>
+    </tr>
+    {% for database in databases %}
+    <tr>
+        <td>{{ database.name }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
