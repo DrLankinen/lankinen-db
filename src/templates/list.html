@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<table>
+    <tr>
+        <th>Database</th>
+    </tr>
+    {% for database in databases %}
+    <tr>
+        <td>
+            {{database.name}}
+        </td>
+        <td>
+            <form method="POST" action="{{ url_for('database_change_name', database_id=database.id) }}">
+                <input type="submit" value="Rename" />
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

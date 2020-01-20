@@ -3,10 +3,15 @@
 
 <head>
     <meta charset="utf-8">
-    <title>TodoApp</title>
+    <title>Lankinen-DB</title>
 </head>
 
 <body>
+    <ul>
+        <li><a href="{{ url_for('databases_index') }}">List databases</a></li>
+        <li><a href="{{ url_for('databases_form') }}">Add a database</a></li>
+    </ul>
+
     {% block body %}
     <p>
         Content.
