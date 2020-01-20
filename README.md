@@ -1,5 +1,7 @@
 # lankinen-db
 
+[https://lankinen-db.herokuapp.com/](Demo)
+
 Simple to setup relational database administration tool.
 
 - Do the most common actions in simple GUI (create table, add row, modify columns, etc.)
