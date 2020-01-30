@@ -7,6 +7,14 @@
 </head>
 
 <body>
+    {% if current_user.is_authenticated %}
+    <p>
+        {{ current_user.email }} <a href="{{ url_for('auth_logout') }}">Logout</a>
+    </p>
+    {% else %}
+    <a href="{{ url_for('auth_login') }}">Login</a> <a href="{{ url_for('auth_register') }}">Register</a>
+    {% endif %}
+
     <ul>
         <li><a href="{{ url_for('databases_index') }}">List databases</a></li>
         <li><a href="{{ url_for('databases_form') }}">Add a database</a></li>

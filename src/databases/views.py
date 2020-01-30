@@ -1,16 +1,22 @@
-from src import app, db
 from flask import redirect, render_template, request, url_for
-from src.databases.models import Database
+from flask_login import login_required
 
-@app.route("/databases", methods=["GET"])
+from src import app, db
+from src.databases.models import Database
+from src.databases.forms import DatabaseForm
+
+@app.route("/databases/", methods=["GET"])
+@login_required
 def databases_index():
-    return render_template("list.html", databases = Database.query.all())
+    return render_template("databases/list.html", databases = Database.query.all())
 
 @app.route("/databases/new/")
+@login_required
 def databases_form():
-    return render_template("new.html")
+    return render_template("databases/new.html", form = DatabaseForm())
 
 @app.route("/databases/<database_id>/", methods=["POST"])
+@login_required
 def database_change_name(database_id):
 
     t = Database.query.get(database_id)
@@ -20,10 +26,15 @@ def database_change_name(database_id):
     return redirect(url_for("databases_index"))
 
 @app.route("/databases/", methods=["POST"])
+@login_required
 def databases_create():
-    item = Database(request.form.get("name"))
+    form = DatabaseForm(request.form)
   
+    if not form.validate():
+        return render_template("databases/new.html", form = form)
+
+    item = Database(form.name.data)
     db.session().add(item)
     db.session().commit()
 
-    return "hello world!"
+    return redirect(url_for("databases_index"))
