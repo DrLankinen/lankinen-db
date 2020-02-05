@@ -1,18 +1,14 @@
 from src import db
+from src.models import Base
 
-class User(db.Model):
+class User(Base):
 
     __tablename__ = "account"
-  
-    id = db.Column(db.Integer, primary_key=True)
-    date_created = db.Column(db.DateTime, default=db.func.current_timestamp())
-    date_modified = db.Column(db.DateTime, default=db.func.current_timestamp(),
-                              onupdate=db.func.current_timestamp())
 
     email = db.Column(db.String(144), nullable=False)
     password = db.Column(db.String(144), nullable=False)
 
-    databases = db.relationship('database', backref='account', lazy=True)
+    databases = db.relationship('Database', backref='account', lazy=True)
 
     def __init__(self, email, password):
         self.email = email

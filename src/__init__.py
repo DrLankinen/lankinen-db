@@ -20,6 +20,9 @@ from src import views
 from src.databases import models
 from src.databases import views
 
+from src.tables import models
+from src.tables import views
+
 from src.auth import models
 from src.auth import views
 

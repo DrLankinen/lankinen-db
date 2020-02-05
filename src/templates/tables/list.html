@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<table>
+    <tr>
+        <th>Database</th>
+        <th>Table Name</th>
+        <th>Columns</th>
+    </tr>
+    {% for table in tables %}
+    <tr>
+        <td>
+            {{table.id}}
+        </td>
+        <td>
+            {{table.name}}
+        </td>
+        <td>
+            {{table.columns}}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

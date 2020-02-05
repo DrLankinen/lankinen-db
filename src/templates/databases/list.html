@@ -3,13 +3,17 @@
 {% block body %}
 <table>
     <tr>
+        <th>ID</th>
         <th>Database</th>
         <th></th>
     </tr>
     {% for database in databases %}
     <tr>
         <td>
-            {{database.name}}
+            {{database.id}}
+        </td>
+        <td>
+            <a href={{database.id}}>{{database.name}}</a>
         </td>
         <td>
             <form method="POST" action="{{ url_for('database_change_name', database_id=database.id) }}">

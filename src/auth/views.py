@@ -37,7 +37,7 @@ def auth_register():
 
     form = RegisterForm(request.form)
 
-    item = User(form.email.data, form.password.data)
+    item = User(form.email.data,form.password.data)
     db.session().add(item)
     db.session().commit()
 

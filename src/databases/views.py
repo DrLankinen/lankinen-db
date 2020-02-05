@@ -15,9 +15,11 @@ def databases_index():
 def databases_form():
     return render_template("databases/new.html", form = DatabaseForm())
 
-@app.route("/databases/<database_id>/", methods=["POST"])
+@app.route("/databases/<database_id>/", methods=["GET", "POST"])
 @login_required
 def database_change_name(database_id):
+    if request.method == "GET":
+        return render_template("databases/details.html", database = Database.query.get(database_id))
 
     t = Database.query.get(database_id)
     t.name = "new name"
