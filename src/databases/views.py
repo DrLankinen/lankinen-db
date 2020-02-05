@@ -1,5 +1,5 @@
 from flask import redirect, render_template, request, url_for
-from flask_login import login_required
+from flask_login import login_required, current_user
 
 from src import app, db
 from src.databases.models import Database
@@ -34,6 +34,8 @@ def databases_create():
         return render_template("databases/new.html", form = form)
 
     item = Database(form.name.data)
+    item.account_id = current_user.id
+    
     db.session().add(item)
     db.session().commit()
 
