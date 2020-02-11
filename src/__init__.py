@@ -6,7 +6,7 @@ import os
 # DB
 from flask_sqlalchemy import SQLAlchemy
 if os.environ.get("HEROKU"):
-    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///dbs.db"
+    app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("HEROKU")
 else:
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///dbs.db"
     app.config["SQLALCHEMY_ECHO"] = True
