@@ -1,8 +1,6 @@
-{% extends "layout.html" %}
-
-{% block body %}
+{% extends "layout.html" %} {% block body %}
 <table>
-    <p>Name: {{ database.name }}</p>
-    <a href="/tables/">New</a>
+  <p>Name: {{ database.name }}</p>
+  <a href="/tables/new">New</a>
 </table>
 {% endblock %}

@@ -10,6 +10,11 @@ from src.tables.forms import TableForm
 def tables_index():
     return render_template("tables/list.html", tables = Table.query.all())
 
+@app.route("/tables/new/")
+@login_required
+def tables_form():
+    return render_template("tables/new.html", form = TableForm())
+
 @app.route("/tables/new", methods=["POST"])
 @login_required
 def tables_create():
