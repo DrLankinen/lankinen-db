@@ -25,7 +25,7 @@ def database_item(database_id):
         db.session().commit()
     return redirect(url_for("databases_index"))
 
-@app.route('/databases/<database_id>/', methods=["GET"])
+@app.route('/databases/delete/<database_id>/', methods=["GET"])
 @login_required
 def database_delete(database_id):
     t = Database.query.filter_by(id=database_id).delete()

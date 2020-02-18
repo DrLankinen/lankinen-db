@@ -15,12 +15,7 @@
     </td>
     <td>
       <a href="rename/{{database.id}}">Rename</a>
-      <form
-        method="GET"
-        action="{{ url_for('database_delete', database_id=database.id) }}"
-      >
-        <input type="submit" value="Delete" />
-      </form>
+      <a href="delete/{{database.id}}">Delete</a>
     </td>
   </tr>
   {% endfor %}
