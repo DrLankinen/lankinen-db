@@ -20,15 +20,15 @@ def database_item(database_id):
         if not form.validate():
             return render_template("databases/new.html", form = form)
         name = form.name.data
-        t = Database.query.get(database_id)
-        t.name = name
+        item = Database.query.get(database_id)
+        item.name = name
         db.session().commit()
     return redirect(url_for("databases_index"))
 
 @app.route('/databases/delete/<database_id>/', methods=["GET"])
 @login_required
 def database_delete(database_id):
-    t = Database.query.filter_by(id=database_id).delete()
+    item = Database.query.filter_by(id=database_id).delete()
     db.session().commit()
     return redirect(url_for("databases_index"))
 
