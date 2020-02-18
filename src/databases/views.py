@@ -3,45 +3,44 @@ from flask_login import login_required, current_user
 
 from src import app, db
 from src.databases.models import Database
-from src.databases.forms import DatabaseForm
+from src.databases.forms import DatabaseForm, RenameDatabaseForm
 
 @app.route("/databases/", methods=["GET"])
 @login_required
 def databases_index():
     return render_template("databases/list.html", databases = Database.query.all())
 
-@app.route("/databases/<database_id>/", methods=["GET", "POST", "DELETE"])
+@app.route("/databases/<database_id>/", methods=["GET", "POST"])
 @login_required
 def database_item(database_id):
-    print()
-    print()
-    print('request.method:',request.method)
-    print()
-    print()
     if request.method == "GET":
         return render_template("databases/details.html", database = Database.query.get(database_id))
     elif request.method == "POST":
+        form = DatabaseForm(request.form)
+        if not form.validate():
+            return render_template("databases/new.html", form = form)
+        name = form.name.data
         t = Database.query.get(database_id)
-        t.name = "new name"
+        t.name = name
         db.session().commit()
-    elif request.method == "DELETE":
-        print('======================')
-        print('======================')
-        print('======================')
-        print('======================')
-        print('======================')
-        print('======================')
-        print('======================')
-        print('======================')
-        t = Database.query.filter_by(id=database_id).delete(t)
-        db.session().commit()
-  
+    return redirect(url_for("databases_index"))
+
+@app.route('/databases/<database_id>/', methods=["GET"])
+@login_required
+def database_delete(database_id):
+    t = Database.query.filter_by(id=database_id).delete()
+    db.session().commit()
     return redirect(url_for("databases_index"))
 
 @app.route("/databases/new/")
 @login_required
 def databases_form():
     return render_template("databases/new.html", form = DatabaseForm())
+
+@app.route("/databases/rename/<database_id>/")
+@login_required
+def databases_rename(database_id):
+    return render_template("databases/rename.html", database = Database.query.get(database_id), form = RenameDatabaseForm())
 
 @app.route("/databases/", methods=["POST"])
 @login_required
