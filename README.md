@@ -1,6 +1,6 @@
 # lankinen-db
 
-[Demo](https://lankinen-db.herokuapp.com/)
+[Demo](https://database48951.herokuapp.com/databases/1/)
 
 Simple to setup relational database administration tool.
 
